@@ -27,7 +27,7 @@ DEBUG = True
 
 APPEND_SLASH = True
 
-ALLOWED_HOSTS = ["tametaapp.us-south.cf.appdomain.cloud"]
+ALLOWED_HOSTS = ["tamapp.us-south.cf.appdomain.cloud"]
 
 
 # Application definition
