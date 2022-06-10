@@ -1,7 +1,7 @@
   applications:
   - name: djangoapp
     routes:
-      - route: tamapp.us-south.cf.appdomain.cloud 
+      - route: tamapp.mybluemix.net  
     memory: 128M
     buildpack: python_buildpack
   - name: djangoapp-nginx
