@@ -1,11 +1,12 @@
   applications:
-  - name: djangoapp
+  - name: mycardealapp
     routes:
-      - route: tamapp.mybluemix.net  
+      - route: mycardealapp.eu-gb.cf.appdomain.cloud
     memory: 128M
     buildpack: python_buildpack
-  - name: djangoapp-nginx
+  - name: mycardealapp-nginx
     routes:
-      - route: tamapp.us-south.cf.appdomain.cloud /static
+      - route: mycardealapp.eu-gb.cf.appdomain.cloud/static
     memory: 128M
     buildpack: staticfile_buildpack
+    
