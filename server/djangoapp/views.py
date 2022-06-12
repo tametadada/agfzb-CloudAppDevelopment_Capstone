@@ -76,7 +76,6 @@ def registration_request(request):
     else:
         return render(request, 'djangoapp/registration.html')
 
-# ...
 
 # Update the `get_dealerships` view to render the index page with a list of dealerships
 def get_dealerships(request):
