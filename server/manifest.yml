@@ -2,7 +2,7 @@
   - name: mycardealapp
     routes:
       - route: mycardealapp.us-south.cf.appdomain.cloud 
-    memory: 128M
+    memory: 64M
     buildpack: python_buildpack
   - name: mycardealapp-nginx
     routes:
