@@ -7,6 +7,6 @@
   - name: mycardealapp-nginx
     routes:
       - route: mycardealapp.us-south.cf.appdomain.cloud/static
-    memory: 128M
+    memory: 64M
     buildpack: staticfile_buildpack
     
