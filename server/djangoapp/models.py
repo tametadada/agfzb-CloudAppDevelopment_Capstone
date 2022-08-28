@@ -88,3 +88,4 @@ class DealerReview:
     def __str__(self):
         return "Review name: " + self.name
 
+ # ReviewPost
