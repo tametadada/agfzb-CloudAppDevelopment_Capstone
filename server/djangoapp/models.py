@@ -2,6 +2,9 @@ from django.db import models
 from django.utils.timezone import now
 from django.core.validators import MinValueValidator
 from django.utils.translation import gettext_lazy as _
+from django.core import serializers 
+import uuid
+import json
 
 # Create your models here.
 
@@ -89,3 +92,4 @@ class DealerReview:
         return "Review name: " + self.name
 
  # ReviewPost
+

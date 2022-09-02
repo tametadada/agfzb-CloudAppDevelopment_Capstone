@@ -18,7 +18,6 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 
-
 # Create an `about` view to render a static about page
 def about(request):
     context = {}
@@ -87,26 +86,19 @@ def get_dealerships(request):
         # Get dealers from the URL
         dealerships = get_dealers_from_cf(url)
         context['dealerships'] = dealerships
-        #dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
-        
-        # return render(request, 'djangoapp/index.html', context)
-       
         # Concat all dealer's short name
         dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
-        #context = {'dealerships' : dealerships}
         # Return a list of dealer short name
-        #return HttpResponse(dealer_names)
         return render(request, 'djangoapp/index.html', context)
 
 
 # Create a `get_dealer_details` view to render the reviews of a dealer
 # def get_dealer_details(request, dealer_id):
-# ...
 def get_dealer_details(request, id):
     if request.method == "GET":
         context = {}
         dealer_url = "https://fb426293.us-south.apigw.appdomain.cloud/api/dealership"
-        dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
+        dealer = get_dealers_from_cf(dealer_url, id=id)
         context["dealer"] = dealer
     
         review_url = "https://fb426293.us-south.apigw.appdomain.cloud/api2/review"
