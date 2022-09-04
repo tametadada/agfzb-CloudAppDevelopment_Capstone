@@ -34,7 +34,7 @@ def main(dict):
     database=client["reviews"]
     
     try:
-        selector = {'id': {'$eq': int(dict["dealerId"])}}
+        selector = {'id': {'$eq': int(dict["dealership"])}}
         result_by_filter=database.get_query_result(selector,raw_result=True)
         response= {
         'headers':{'Content-Type':'application/json'},
