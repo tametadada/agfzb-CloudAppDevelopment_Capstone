@@ -105,13 +105,10 @@ def get_dealer_reviews_from_cf(url, **kwargs):
         json_result = get_request(url, id=id)
     else:
         json_result = get_request(url)
-
+        # print(json_result)
     if json_result:
         reviews = json_result["body"]["data"]["docs"]
-
         for dealer_review in reviews:
-            dealer_review = reviews["docs"][0]
-            
             review_obj = DealerReview(dealership=dealer_review["dealership"],
                                    name=dealer_review["name"],
                                    purchase=dealer_review["purchase"],
@@ -131,7 +128,6 @@ def get_dealer_reviews_from_cf(url, **kwargs):
             print(sentiment)
             review_obj.sentiment = sentiment
             results.append(review_obj)
-
     return results
 
 

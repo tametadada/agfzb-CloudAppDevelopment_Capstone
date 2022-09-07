@@ -34,13 +34,13 @@ def main(dict):
     database=client["reviews"]
     
     try:
-        selector = {'id': {'$eq': int(dict["dealership"])}}
-        result_by_filter=database.get_query_result(selector,raw_result=True)
-        response= {
+        selector = {'dealership': {'$eq': int(dict["id"])}}
+        # result_by_filter=database.get_query_result(selector,raw_result=True)
+        result= {
         'headers':{'Content-Type':'application/json'},
-        'body':{'data':result_by_filter}
+        'body':{'data':response}
         }
-        return response
+        return result
     except:
         return {
             'statusCode': 404,

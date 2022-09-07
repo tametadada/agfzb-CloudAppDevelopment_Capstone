@@ -11,6 +11,12 @@
     <!--Add a nav bar here -->
     {% include 'djangoapp/navbar.html' with id=id requestpath=request.path %}
     <!-- Add reviews as cards -->
+    {% if user.is_authenticated %}
+    <li>
+        <a class="btn btn-link" href="{% url 'djangoapp:add_review' id %}">Add Review</a>
+    </li>
+    {% endif %}
+     <!-- Add reviews as cards -->
     <h1>Reviews for {{dealer.full_name}}</h1>
     <div class="card-columns">
       {% for review in Reviews %}
