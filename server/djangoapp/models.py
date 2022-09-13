@@ -37,7 +37,7 @@ class CarModel(models.Model):
     
     car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
     name = models.CharField(null=False, max_length=60)
-    id = models.IntegerField(null=False)
+    id = models.IntegerField(null=False, default=1, primary_key=True)
     car_type = models.CharField(null=False, choices=CarType, max_length=25)
     year = models.PositiveSmallIntegerField(null=False, validators=[MinValueValidator(1900)])
     
