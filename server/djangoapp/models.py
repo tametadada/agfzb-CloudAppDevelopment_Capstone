@@ -8,11 +8,6 @@ import json
 
 # Create your models here.
 
-# <HINT> Create a Car Make model `class CarMake(models.Model)`:
-# - Name
-# - Description
-# - Any other fields you would like to include in car make model
-# - __str__ method to print a car make object
 class CarMake(models.Model):
     name = models.CharField(null=False, max_length=35)
     description = models.CharField(null=False, max_length=200)
@@ -30,13 +25,7 @@ class CarMake(models.Model):
 # - Any other fields you would like to include in car model
 # - __str__ method to print a car make object
 class CarModel(models.Model):
-    #class CarType(models.TextChoices):
-    #    COUPE = 'CPE', _('Coupe')
-    #    PICKUP = 'PKU', _('Pickup')
-    #    SEDAN = 'SDN', _('Sedan')
-    #    SUV = 'SUV'
-    #    WAGON = 'WGN', _('wagon')
-
+    
     CarType = (
         ('CPE', 'COUPE'),
         ('PKU', 'PICKUP'),
@@ -48,18 +37,16 @@ class CarModel(models.Model):
     
     car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
     name = models.CharField(null=False, max_length=60)
-    dealer_id = models.IntegerField(null=False)
+    id = models.IntegerField(null=False)
     car_type = models.CharField(null=False, choices=CarType, max_length=25)
-    #car_type = models.CharField(null=False, choices=CarType.choices, max_length=25)
     year = models.PositiveSmallIntegerField(null=False, validators=[MinValueValidator(1900)])
     
     def __str__(self):
-        #return (str(self.year) + " " + self.name + " " + self.car_type)
         return 'Name ' + self.name
 
 # <HINT> Create a plain Python class `CarDealer` to hold dealer data
 class CarDealer:
-    def __init__(self, address, city, full_name, id, lat, long, short_name, st, zip, state):
+    def __init__(self, address, city, full_name, id, lat, long, short_name, st, zip):
         self.address = address
         self.city = city
         self.full_name = full_name
@@ -69,27 +56,24 @@ class CarDealer:
         self.short_name = short_name
         self.st = st
         self.zip = zip
-        self.state = state
 
     def __str__(self):
         return "Dealer name: " + self.full_name
 
 # <HINT> Create a plain Python class `DealerReview` to hold review data
 class DealerReview:
-    def __init__(self, dealership, name, purchase, review, purchase_date, car_make, car_model, car_year, sentiment, id):
-        self.dealership = dealership
+    def __init__(self, dealership, name, purchase, review):
         self.name = name
         self.purchase = purchase
         self.review = review
-        self.purchase_date = purchase_date
-        self.car_make = car_make
-        self.car_model = car_model
-        self.car_year = car_year
-        self.sentiment = sentiment
-        self.id = id
+        self.purchase_date = ""
+        self.car_make = ""
+        self.car_model = ""
+        self.car_year = ""
+        self.sentiment = ""
+        self.id = ""
 
     def __str__(self):
-        return "Review name: " + self.name
+        return "Reviewer name: " + self.name + " Review: " + self.review
 
- # ReviewPost
 

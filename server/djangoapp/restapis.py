@@ -3,12 +3,10 @@ import requests
 import json
 from .models import CarDealer, DealerReview
 from requests.auth import HTTPBasicAuth
-# from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
-#from ibm_watson import NaturalLanguageUnderstandingV1
-#from ibm_watson.natural_language_understanding_v1 import Features,SentimentOptions
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+from ibm_watson import NaturalLanguageUnderstandingV1
+from ibm_watson.natural_language_understanding_v1 import Features,SentimentOptions
 import time
-
-
 
 # Create a `get_request` to make HTTP GET requests
 # e.g., response = requests.get(url, params=params, headers={'Content-Type': 'application/json'},
@@ -43,6 +41,15 @@ def get_request(url, **kwargs):
 # Create a `post_request` to make HTTP POST requests
 # e.g., response = requests.post(url, params=kwargs, json=payload)
 
+def post_request(url, payload, **kwargs):
+    print(kwargs)
+    print("POST to {} ".format(url))
+    print(payload)
+    response = requests.post(url, params=kwargs, json=payload)
+    status_code = response.status_code
+    print("With status {} ".format(status_code))
+    json_data = json.loads(response.text)
+    return json_data
 
 
 # Create a get_dealers_from_cf method to get dealers from a cloud function
@@ -77,20 +84,23 @@ def get_dealers_from_cf(url, **kwargs):
             results.append(dealer_obj)
     return results
 
+
+# Gets a single dealer from the Cloudant DB with the Cloud Function get-dealerships
+# Requires the dealer_id parameter with only a single value
+
 def get_dealer_by_id_from_cf(url, id):
     # Call get_request with a URL parameter
     json_result = get_request(url, id=id)
     if json_result:
         # Get the row list in JSON as dealers
-        dealer = json_result["result"]
+        dealer = json_result["body"]
         dealer_doc = dealer[0]
         # Create a CarDealer object with values in `doc` object
         dealer_obj = CarDealer(address=dealer_doc["address"], city=dealer_doc["city"], full_name=dealer_doc["full_name"],
                                 id=dealer_doc["id"], lat=dealer_doc["lat"], long=dealer_doc["long"],
                                 short_name=dealer_doc["short_name"],
                                 st=dealer_doc["st"], zip=dealer_doc["zip"])
-        results = dealer_obj
-    return results
+    return dealer_obj
 
 
 

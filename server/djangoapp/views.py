@@ -4,17 +4,20 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import *
 from .restapis import *
-from .models import CarDealer, DealerReview
-#from .restapis import get_dealers_from_cf, get_dealer_by_id_from_cf, get_dealer_reviews_from_cf, post_request
+from .models import CarModel, CarMake, CarDealer, DealerReview
+from .restapis import get_dealers_from_cf, get_dealer_by_id_from_cf, get_dealer_reviews_from_cf, get_request, post_request
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
 import logging
+from django.db import models
+from django.core import serializers
+from django.utils.timezone import now
+import uuid
 import json
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
-
 
 # Create your views here.
 
@@ -96,13 +99,15 @@ def get_dealerships(request):
 
 def get_dealer_details(request, id):
     if request.method == "GET":
+        context = {}
+        dealer_url = "https://fb426293.us-south.apigw.appdomain.cloud/api/dealership"
+        dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
+        context["dealer"] = dealer
+
         review_url = "https://fb426293.us-south.apigw.appdomain.cloud/api2/review"
         reviews = get_dealer_reviews_from_cf(review_url, id=id)
-        context = {
-            "reviews": reviews,
-            "id": id
-        }
-        print(context)
+        print(reviews)
+        context["reviews"] = reviews
         return render(request, 'djangoapp/dealer_details.html', context)
         
 # Create a `add_review` view to submit a review
@@ -112,7 +117,7 @@ def get_dealer_details(request, id):
 def add_review(request, id):
     if request.user.is_authenticated:
         context = {}
-        dealer_url = "https://fb426293.us-south.apigw.appdomain.cloud/api2/review"
+        dealer_url = "https://fb426293.us-south.apigw.appdomain.cloud/api/dealership"
         dealer = get_dealer_by_id_from_cf(dealer_url, id)
         context["dealer"] = dealer
         if request.method == "GET":
