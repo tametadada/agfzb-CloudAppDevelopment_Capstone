@@ -9,8 +9,8 @@ import json
 # Create your models here.
 
 class CarMake(models.Model):
-    name = models.CharField(null=False, max_length=35)
-    description = models.CharField(null=False, max_length=200)
+    name = models.CharField(null=False, max_length=100)
+    description = models.CharField(null=False, max_length=500)
 
     def __str__(self):
         return 'Name:' + self.name + ',' + \
@@ -76,4 +76,19 @@ class DealerReview:
     def __str__(self):
         return "Reviewer name: " + self.name + " Review: " + self.review
 
+# postReview
+class ReviewPost:
 
+    def __init__(self, dealership, name, purchase, review):
+        self.dealership = dealership
+        self.name = name
+        self.purchase = purchase
+        self.review = review
+        self.purchase_date = ""
+        self.car_make = ""
+        self.car_model = ""
+        self.car_year = ""
+
+    def to_json(self):
+        return json.dumps(self, default=lambda o: o.__dict__,
+                            sort_keys=True, indent=4)
