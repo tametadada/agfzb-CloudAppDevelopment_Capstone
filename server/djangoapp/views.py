@@ -138,7 +138,7 @@ def add_review(request, id):
             payload["name"] = username
             payload["dealership"] = id
             payload["id"] = id
-            payload["review"] = request.POST["content"]
+            payload["review"] = request.POST["review"]
             payload["purchase"] = False
             if "purchasecheck" in request.POST:
                 if request.POST["purchasecheck"] == 'on':
