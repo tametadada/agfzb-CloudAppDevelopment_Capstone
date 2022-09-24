@@ -110,6 +110,7 @@ def get_dealer_details(request, id):
         reviews = get_dealer_reviews_from_cf(review_url, id=id)
         print(reviews)
         context["reviews"] = reviews
+        # context["id"] = id
         return render(request, 'djangoapp/dealer_details.html', context)
         
 # Create a `add_review` view to submit a review
@@ -144,9 +145,9 @@ def add_review(request, id):
                 if request.POST["purchasecheck"] == 'on':
                     payload["purchase"] = True
             payload["purchase_date"] = request.POST["purchasedate"]
-            payload["car_make"] = car.make.name
+            payload["car_make"] = car.car_make.name
             payload["car_model"] = car.name
-            payload["car_year"] = int(car.year.strftime("%Y"))
+            payload["car_year"] = car.year
 
             new_payload = {}
             new_payload["review"] = payload
