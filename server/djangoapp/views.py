@@ -126,7 +126,6 @@ def add_review(request, id):
         cars = CarModel.objects.all()
         print(cars)
         context["cars"] = cars
-        
         return render(request, 'djangoapp/add_review.html', context)
     elif request.method == 'POST':
         if request.user.is_authenticated:

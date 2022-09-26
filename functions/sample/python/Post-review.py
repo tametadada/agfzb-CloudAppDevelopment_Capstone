@@ -17,7 +17,7 @@ def main(dict):
             connect=True,
         )
         database= client["reviews"],
-        document=database.create_document(dict)
+        document=database.create_document(dict['review'])
         if document.exists():
             result= {
             'headers':{'Content-Type':'application/json'},
