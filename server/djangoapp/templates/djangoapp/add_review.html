@@ -51,7 +51,7 @@
     <form action="{% url 'djangoapp:add_review' dealer_id %}" method="post">
         <div class="container">
             {% csrf_token %}
-            <h1>Write a review about {{dealer.full_name}}</h1>
+            <h1>Write a review about dealer {{dealer_id}}</h1>
             <hr>
             <div class="mb-3">
                 <label for="review"><b>Enter the review content:</b></label>
