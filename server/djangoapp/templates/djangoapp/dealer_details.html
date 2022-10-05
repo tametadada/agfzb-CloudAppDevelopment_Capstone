@@ -10,7 +10,7 @@
     <body>
 
     <!--Add a nav bar here -->
-    {% include 'djangoapp/navbar.html' with id=id requestpath=request.path %}
+    {% include 'djangoapp/navbar.html' with dealer_id=dealer_id requestpath=request.path %}
     <!-- Add reviews as cards -->
     <div class="container-fluid">
         {% if messages %}

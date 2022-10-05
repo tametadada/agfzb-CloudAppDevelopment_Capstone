@@ -95,33 +95,33 @@ def get_dealerships(request):
 
 # Create a `get_dealer_details` view to render the reviews of a dealer
 
-def get_dealer_details(request, id):
+def get_dealer_details(request, dealer_id):
     if request.method == "GET":
         context = {}
         dealer_url = "https://fb426293.us-south.apigw.appdomain.cloud/api/dealership"
         # dealer = get_dealers_from_cf(dealer_url, id=id)
-        dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
+        dealer = get_dealer_by_id_from_cf(dealer_url, dealerId=dealer_id)
         context["dealer"] = dealer
 
         review_url = "https://fb426293.us-south.apigw.appdomain.cloud/api2/review"
-        reviews = get_dealer_reviews_from_cf(review_url, id=id)
+        reviews = get_dealer_reviews_from_cf(review_url, dealerId=dealer_id)
         print(reviews)
         context["reviews"] = reviews
+        context['dealer_id'] = dealer_id
         return render(request, 'djangoapp/dealer_details.html', context)
         
 # Create a `add_review` view to submit a review
 # def add_review(request, dealer_id):
 
-def add_review(request, id):
+def add_review(request, dealer_id):
     context = {}
     dealer_url = "https://fb426293.us-south.apigw.appdomain.cloud/api/dealership"
-    dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
+    dealer = get_dealer_by_id_from_cf(dealer_url, dealer_id=dealer_id)
     context["dealer"] = dealer
     if request.method == 'GET':
         # Get cars for the dealer
-        cars = CarModel.objects.all()
-        print(cars)
-        context["cars"] = cars
+        context["cars"] = CarModel.objects.filter(dealer_id=dealer_id)
+        context["dealer_id"] = dealer_id
         return render(request, 'djangoapp/add_review.html', context)
     elif request.method == 'POST':
         if request.user.is_authenticated:
@@ -132,8 +132,8 @@ def add_review(request, id):
             car = CarModel.objects.get(pk=car_id)
             payload["time"] = datetime.utcnow().isoformat()
             payload["name"] = username
-            payload["dealership"] = id
-            payload["id"] = id
+            payload["dealership"] = dealer_id
+            payload["id"] = request.user.id
             payload["review"] = request.POST["review"]
             payload["purchase"] = False
             if "purchasecheck" in request.POST:
@@ -147,5 +147,5 @@ def add_review(request, id):
             new_payload = {}
             new_payload["review"] = payload
             review_post_url = "https://fb426293.us-south.apigw.appdomain.cloud/api2/review"
-            post_request(review_post_url, new_payload, id=id)
-        return redirect("djangoapp:dealer_details", id=id)
+            post_request(review_post_url, new_payload, dealer_id=dealer_id)
+        return redirect("djangoapp:dealer_details", dealer_id=dealer_id)

@@ -11,8 +11,8 @@ class CarModelInline(admin.StackedInline):
     extra = 2
 # CarModelAdmin class
 class CarModelAdmin(admin.ModelAdmin):
-    list_display = ('name', 'car_type')
-    list_filter = ['year', 'name', 'car_type', 'id']
+    list_display = ('name', 'car_type', 'dealer_id')
+    list_filter = ['year', 'name', 'car_type']
     search_fields = ['name', 'description', 'car_make']
 # CarMakeAdmin class with CarModelInline
 class CarMakeAdmin(admin.ModelAdmin):

@@ -87,13 +87,13 @@ def get_dealers_from_cf(url, **kwargs):
 # Gets a single dealer from the Cloudant DB with the Cloud Function get-dealerships
 # Requires the dealer_id parameter with only a single value
 
-def get_dealer_by_id_from_cf(url, id):
+def get_dealer_by_id_from_cf(url, **kwargs):
     # Call get_request with a URL parameter
-    json_result = get_request(url, id=id)
+    json_result = get_request(url, **kwargs)
     if json_result:
         # Get the row list in JSON as dealers
-        dealerships = json_result["result"]
-        for dealer in dealerships:
+        dealers = json_result["result"]
+        for dealer in dealers:
             dealer_doc = dealer["doc"]
             # Create a CarDealer object with values in `doc` object
             dealer_obj = CarDealer(address=dealer_doc["address"], city=dealer_doc["city"], full_name=dealer_doc["full_name"],
@@ -109,12 +109,8 @@ def get_dealer_by_id_from_cf(url, id):
 # - Parse JSON results into a DealerView object list
 def get_dealer_reviews_from_cf(url, **kwargs):
     results = []
-    id = kwargs.get("id")
-    if id:
-        json_result = get_request(url, id=id)
-    else:
-        json_result = get_request(url)
-        print(json_result)
+    json_result = get_request(url, **kwargs)
+    print(json_result)
     if json_result:
         reviews = json_result["body"]["data"]["docs"]
         for review in reviews:
