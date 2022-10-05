@@ -18,9 +18,7 @@
                 <div class="alert alert-warning" role="alert">{{ message }}</div>
             {% endfor %}
         {% endif %}
-        {% if review_list %}
         <h3>Reviews for dealer:<b> {{dealer_id}}</b></h3>
-    
         <div class="container">
             <div class="card-columns">
                 {% for review in reviews %}
@@ -47,9 +45,6 @@
                 </div>
                 {% endfor %}
             </div>
-        {% else %}
-            <h2>No reviews are available for this dealer. </h2>
-        {% endif %}
         </div>
     </div>
     </body>
