@@ -10,7 +10,7 @@
     <body>
 
     <!--Add a nav bar here -->
-    {% include 'djangoapp/navbar.html' with dealer_id=dealer_id requestpath=request.path %}
+    {% include 'djangoapp/navbar.html' with dealerId=dealer_id requestpath=request.path %}
     <!-- Add reviews as cards -->
     <div class="container-fluid">
         {% if messages %}
@@ -18,7 +18,7 @@
                 <div class="alert alert-warning" role="alert">{{ message }}</div>
             {% endfor %}
         {% endif %}
-        <h3>Reviews for dealer:<b> {{dealer_id}}</b></h3>
+        <h3>Reviews for dealer:<b> {{dealer.full_name}}</b></h3>
         <div class="container">
             <div class="card-columns">
                 {% for review in reviews %}

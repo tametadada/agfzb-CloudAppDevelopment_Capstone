@@ -1,8 +1,8 @@
 requests
 Django
 gunicorn==20.0.4
-Pillow==9.2.0 # this is for CI-CD Git action
-# Pillow==8.0.1 # this is for theai lab
+#Pillow==9.2.0 # this is for CI-CD Git action
+Pillow==8.0.1 # this is for theai lab
 # Pillow==8.4.0 # if 8.0.1 not working try this
 ibm-cloud-sdk-core==3.10.0
 ibm-watson==5.2.2

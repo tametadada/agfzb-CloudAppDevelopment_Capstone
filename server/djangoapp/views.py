@@ -99,8 +99,8 @@ def get_dealer_details(request, dealer_id):
     if request.method == "GET":
         context = {}
         dealer_url = "https://fb426293.us-south.apigw.appdomain.cloud/api/dealership"
-        # dealer = get_dealers_from_cf(dealer_url, dealerId=dealer_id)
-        dealer = get_dealer_by_id_from_cf(dealer_url, dealerId=dealer_id)
+        dealer = get_dealers_from_cf(dealer_url, dealerId=dealer_id)
+        # dealer = get_dealer_by_id_from_cf(dealer_url, dealer_id=dealer_id)
         context["dealer"] = dealer
 
         review_url = "https://fb426293.us-south.apigw.appdomain.cloud/api2/review"
@@ -116,7 +116,7 @@ def get_dealer_details(request, dealer_id):
 def add_review(request, dealer_id):
     context = {}
     dealer_url = "https://fb426293.us-south.apigw.appdomain.cloud/api/dealership"
-    dealer = get_dealer_by_id_from_cf(dealer_url, dealer_id=dealer_id)
+    dealer = get_dealers_from_cf(dealer_url, dealerId=dealer_id)
     context["dealer"] = dealer
     if request.method == 'GET':
         # Get cars for the dealer
@@ -133,7 +133,7 @@ def add_review(request, dealer_id):
             payload["time"] = datetime.utcnow().isoformat()
             payload["name"] = username
             payload["dealership"] = dealer_id
-            payload["id"] = request.user.id
+            payload["id"] = dealer_id
             payload["review"] = request.POST["review"]
             payload["purchase"] = False
             if "purchasecheck" in request.POST:

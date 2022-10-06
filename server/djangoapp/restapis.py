@@ -81,6 +81,10 @@ def get_dealers_from_cf(url, **kwargs):
                                    short_name=dealer_doc["short_name"], state=dealer_doc["state"],
                                    st=dealer_doc["st"], zip=dealer_doc["zip"])
             results.append(dealer_obj)
+            
+    if 'dealerId' in kwargs:
+        results = [result for result in results if result.id == kwargs.get('dealerId')][0]
+
     return results
 
 
