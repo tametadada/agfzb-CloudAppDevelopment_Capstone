@@ -18,11 +18,12 @@
                 <div class="alert alert-warning" role="alert">{{ message }}</div>
             {% endfor %}
         {% endif %}
-        <h3>Reviews for <b> {{dealer.full_name}}</b></h3>
-        <div class="card-container-text"> 
-            <h7>Address: <i>{{dealer.address}}, {{dealer.city}}, {{dealer.state}}, {{dealer.zip}}<i></h6>
-            <br>
-            <br>
+        <div class="jumbotron text-center">
+            <h2>{{dealer.full_name}}</h2>
+            <p class="text-primary">{{dealer.address}}, {{dealer.city}}, {{dealer.state}}, {{dealer.zip}}</p>
+            <p class="text-info">You can add a review by Signing up and login </p>
+        </div>
+        <br>
         <div class="container">
             <div class="card-columns">
                 {% for review in reviews %}
