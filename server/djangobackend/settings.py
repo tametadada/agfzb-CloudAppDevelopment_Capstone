@@ -27,7 +27,7 @@ DEBUG = True
 
 APPEND_SLASH = True
 
-ALLOWED_HOSTS = ["mycardealapp.us-south.cf.appdomain.cloud", "localhost", "*"]
+ALLOWED_HOSTS = ["mycardealapp.us-south.cf.appdomain.cloud", "localhost", "*", "https://nanuna2009-8000.theiadocker-3-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai"]
 
 
 # Application definition
