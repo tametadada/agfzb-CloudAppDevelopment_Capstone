@@ -1,4 +1,4 @@
-FROM python:3.8.2
+    FROM python:3.8.2
 
     ENV PYTHONBUFFERED 1
     ENV PYTHONWRITEBYTECODE 1
@@ -14,7 +14,7 @@ FROM python:3.8.2
     # Install the requirements
     COPY requirements.txt $APP
     RUN pip install --upgrade pip
-    RUN pip install -r requirements.txt
+    RUN python -m pip install -r requirements.txt
 
     # Copy the rest of the files
     COPY . $APP
