@@ -6,7 +6,7 @@
     RUN apt-get update \
         && apt-get install -y netcat
 
-    ENV APP=/app
+    ENV APP=/app/
 
     # Change the workdir.
     WORKDIR $APP
@@ -14,7 +14,7 @@
     # Install the requirements
     COPY requirements.txt $APP
     RUN pip install --upgrade pip
-    RUN python -m pip install -r requirements.txt
+    RUN pip install -r requirements.txt
 
     # Copy the rest of the files
     COPY . $APP
