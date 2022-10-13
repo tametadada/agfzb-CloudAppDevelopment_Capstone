@@ -27,7 +27,9 @@ DEBUG = True
 
 APPEND_SLASH = True
 
-ALLOWED_HOSTS = ["mycardealapp.us-south.cf.appdomain.cloud", "localhost", 'localhost:8000', "https://nanuna2009-8000.theiadocker-3-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai"]
+ALLOWED_HOSTS = ["mycardealapp.us-south.cf.appdomain.cloud", "localhost", 'localhost:8000', 'https://nanuna2009-8000.theiadocker-2-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/']
+
+CSRF_TRUSTED_ORIGINS = ["https://nanuna2009-8000.theiadocker-2-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/", 'https://*.127.0.0.1', "https://mycardealapp.us-south.cf.appdomain.cloud"]
 
 
 # Application definition
@@ -126,4 +128,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
 MEDIA_URL = '/media/'
 
-CSRF_TRUSTED_ORIGINS = ['https://ksundararaja-8000.theiadocker-2-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai']
