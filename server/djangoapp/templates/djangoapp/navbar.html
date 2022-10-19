@@ -2,8 +2,9 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#dealernav" aria-controls="navbarTogglerDealerNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">Dealership</a>
+    <a class="navbar-brand" href="#">BestCar Dealership</a>
     <div class="collapse navbar-collapse" id="dealernav">
+            <a class="nav-link" href="{% url 'djangoapp:index' %}">Home</a>
             <a class="nav-link" href="{% url 'djangoapp:about' %}">About</a>
             <a class="nav-link" href="{% url 'djangoapp:contact' %}">Contact Us</a>
     </div>
