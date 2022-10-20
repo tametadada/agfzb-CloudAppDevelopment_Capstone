@@ -1,6 +1,10 @@
 name: Build and deploy to IBM Cloud Foundry
 
-on: workflow_dispatch
+on:
+ workflow_dispatch:
+ push:
+   branches:
+     - master  
 
 # Environment variables available to all jobs and steps in this workflow
 env:
